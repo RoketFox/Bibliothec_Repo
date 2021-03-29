@@ -71,3 +71,4 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 Bibliothec_UnityProject/Library/
 Bibliothec_UnityProject/Temp/
+Bibliothec_UnityProject/obj/
