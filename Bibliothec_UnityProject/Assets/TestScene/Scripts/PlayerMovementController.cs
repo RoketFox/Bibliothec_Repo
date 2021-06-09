@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -19,9 +20,9 @@ public class PlayerMovementController : MonoBehaviour
     [Header("Gravity settings")]
     [SerializeField]
     private Transform[] groundChecks = new Transform[5];
-    [SerializeField]
-    private LayerMask walckbleLayers;
-    [SerializeField]
+    [SerializeField, Tooltip("Number of layer, on which player can walk at any angle")]
+    private int walckbleLayer;
+    [SerializeField, Tooltip("Layers, on which player can walk straight")]
     private LayerMask groundLayers;
     [SerializeField]
     private float turnSpeed = 2f;
@@ -192,40 +193,40 @@ public class PlayerMovementController : MonoBehaviour
         RaycastHit HitRight;
         RaycastHit HitLeft;
 
-        Physics.Raycast(groundChecks[0].position, -groundChecks[0].transform.up, out HitFront, rayRange, walckbleLayers);
-        Debug.DrawRay(groundChecks[0].position, -groundChecks[0].transform.up * 10, Color.red);
+        Physics.Raycast(groundChecks[0].position, -groundChecks[0].transform.up, out HitFront, rayRange);
+        Debug.DrawRay(groundChecks[0].position, -groundChecks[0].transform.up * 10, Color.green);
 
-        Physics.Raycast(groundChecks[1].position, -groundChecks[1].transform.up, out HitCentre, 10f, walckbleLayers);
-        Debug.DrawRay(groundChecks[1].position, -groundChecks[1].transform.up * 10, Color.red);
+        Physics.Raycast(groundChecks[1].position, -groundChecks[1].transform.up, out HitCentre, rayRange);
+        Debug.DrawRay(groundChecks[1].position, -groundChecks[1].transform.up * 10, Color.green);
 
-        Physics.Raycast(groundChecks[2].position, -groundChecks[2].transform.up, out HitBack, 10f, walckbleLayers);
-        Debug.DrawRay(groundChecks[2].position, -groundChecks[2].transform.up * 10, Color.red);
+        Physics.Raycast(groundChecks[2].position, -groundChecks[2].transform.up, out HitBack, rayRange);
+        Debug.DrawRay(groundChecks[2].position, -groundChecks[2].transform.up * 10, Color.green);
 
-        Physics.Raycast(groundChecks[3].position, -groundChecks[3].transform.up, out HitRight, 10f, walckbleLayers);
-        Debug.DrawRay(groundChecks[3].position, -groundChecks[3].transform.up * 10, Color.red);
+        Physics.Raycast(groundChecks[3].position, -groundChecks[3].transform.up, out HitRight, rayRange);
+        Debug.DrawRay(groundChecks[3].position, -groundChecks[3].transform.up * 10, Color.green);
 
-        Physics.Raycast(groundChecks[4].position, -groundChecks[4].transform.up, out HitLeft, 10f, walckbleLayers);
-        Debug.DrawRay(groundChecks[4].position, -groundChecks[4].transform.up * 10, Color.red);
+        Physics.Raycast(groundChecks[4].position, -groundChecks[4].transform.up, out HitLeft, rayRange);
+        Debug.DrawRay(groundChecks[4].position, -groundChecks[4].transform.up * 10, Color.green);
 
         Vector3 HitDir = transform.up;
 
-        if (HitFront.transform != null)
+        if (HitFront.transform != null && HitFront.collider.gameObject.layer == walckbleLayer)
         {
             HitDir += HitFront.normal;
         }
-        if (HitCentre.transform != null)
+        if (HitCentre.transform != null && HitCentre.collider.gameObject.layer == walckbleLayer)
         {
             HitDir += HitCentre.normal;
         }
-        if (HitBack.transform != null)
+        if (HitBack.transform != null && HitBack.collider.gameObject.layer == walckbleLayer)
         {
             HitDir += HitBack.normal;
         }
-        if (HitRight.transform != null)
+        if (HitRight.transform != null && HitRight.collider.gameObject.layer == walckbleLayer)
         {
             HitDir += HitRight.normal;
         }
-        if (HitLeft.transform != null)
+        if (HitLeft.transform != null && HitLeft.collider.gameObject.layer == walckbleLayer)
         {
             HitDir += HitLeft.normal;
         }
@@ -258,4 +259,6 @@ public class PlayerMovementController : MonoBehaviour
     }
     #endregion
 
+    #region HelpVoids
+    #endregion
 }
