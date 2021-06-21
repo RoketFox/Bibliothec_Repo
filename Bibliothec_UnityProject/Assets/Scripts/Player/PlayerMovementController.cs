@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerMovementController : MonoBehaviour
+public class PlayerMovementController : PortalTraveller
 {
     #region Variables
     private InputMaster Actions;

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEditor.UI;
 
 public class JumpButton : MonoBehaviour, IPointerDownHandler
 {
@@ -15,6 +14,5 @@ public class JumpButton : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         jumpVariable.Jump();
-        Debug.Log("jump");
     }
 }
