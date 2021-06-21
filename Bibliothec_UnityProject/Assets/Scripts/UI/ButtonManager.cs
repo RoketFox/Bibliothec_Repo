@@ -13,4 +13,10 @@ public class ButtonManager : MonoBehaviour
         Application.Quit();
 #endif
     }
+    public void FluidActivation()
+    {
+        GameObject fluid = GameObject.Find("Fluid");
+        fluid.SetActive(false);
+        fluid.SetActive(true);
+    }
 }
